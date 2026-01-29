@@ -61,6 +61,9 @@ elif os.path.isfile(img_source):
 elif 'usb' in img_source:
     source_type = 'usb'
     usb_idx = int(img_source[3:])
+elif img_source.isdigit():   # <-- ADD THIS
+    source_type = 'usb'
+    usb_idx = int(img_source)
 elif 'picamera' in img_source:
     source_type = 'picamera'
     picam_idx = int(img_source[8:])
