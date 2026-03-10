@@ -43,7 +43,7 @@ if (not os.path.exists(model_path)):
 model = YOLO(model_path, task='detect')
 labels = model.names
 
-target_object = "human"   # objek yang ingin memicu foto
+target_object = "human body"   # objek yang ingin memicu foto
 photo_taken = False        # agar foto hanya diambil sekali
 
 # Parse input to determine if image source is a file, folder, video, or USB camera
