@@ -43,6 +43,9 @@ if (not os.path.exists(model_path)):
 model = YOLO(model_path, task='detect')
 labels = model.names
 
+target_object = "person"   # objek yang ingin memicu foto
+photo_taken = False        # agar foto hanya diambil sekali
+
 # Parse input to determine if image source is a file, folder, video, or USB camera
 img_ext_list = ['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.bmp','.BMP']
 vid_ext_list = ['.avi','.mov','.mp4','.mkv','.wmv']
@@ -203,6 +206,16 @@ while True:
 
             # Basic example: count the number of objects in the image
             object_count = object_count + 1
+          
+              # Ambil foto jika manusia terdeteksi
+    if classname == target_object and not photo_taken:
+
+        print("Human detected! Taking photo...")
+
+        filename = f"intruder_{int(time.time())}.png"
+        cv2.imwrite(filename, frame)
+
+        photo_taken = True
 
     # Calculate and draw framerate (if using video, USB, or Picamera source)
     if source_type == 'video' or source_type == 'usb' or source_type == 'picamera':
