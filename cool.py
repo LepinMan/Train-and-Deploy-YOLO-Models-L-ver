@@ -45,6 +45,8 @@ labels = model.names
 
 target_object = "human body"   # objek yang ingin memicu foto
 photo_taken = False        # agar foto hanya diambil sekali
+detect_time = None
+delay_seconds = 3
 
 # Parse input to determine if image source is a file, folder, video, or USB camera
 img_ext_list = ['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.bmp','.BMP']
@@ -207,11 +209,17 @@ while True:
 
             # Basic example: count the number of objects in the image
             object_count = object_count + 1
-            if classname == target_object and not photo_taken:
-                print("Human detected! Taking photo...")
-                filename = f"intruder_{int(time.time())}.png"
-                cv2.imwrite(filename, frame)
-                photo_taken = True
+            if classname == target_object:
+              
+                if detect_time is None:
+                    detect_time = time.time()
+                    print("Human detected, starting timer...")
+                
+                elif time.time() - detect_time >= delay_seconds and not photo_taken:
+                    print("3 seconds passed, taking photo...")
+                    filename = f"intruder_{int(time.time())}.png"
+                    cv2.imwrite(filename, frame)
+                    photo_taken = True
 
     # Calculate and draw framerate (if using video, USB, or Picamera source)
     if source_type == 'video' or source_type == 'usb' or source_type == 'picamera':
