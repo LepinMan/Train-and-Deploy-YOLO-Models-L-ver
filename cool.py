@@ -206,8 +206,6 @@ while True:
 
             # Basic example: count the number of objects in the image
             object_count = object_count + 1
-          
-              # Ambil foto jika manusia terdeteksi
               if classname == target_object and not photo_taken:
                 print("Human detected! Taking photo...")
                 filename = f"intruder_{int(time.time())}.png"
