@@ -208,14 +208,14 @@ while True:
             object_count = object_count + 1
           
               # Ambil foto jika manusia terdeteksi
-    if classname == target_object and not photo_taken:
+          if classname == target_object and not photo_taken:
 
-        print("Human detected! Taking photo...")
+            print("Human detected! Taking photo...")
 
-        filename = f"intruder_{int(time.time())}.png"
-        cv2.imwrite(filename, frame)
+            filename = f"intruder_{int(time.time())}.png"
+            cv2.imwrite(filename, frame)
 
-        photo_taken = True
+            photo_taken = True
 
     # Calculate and draw framerate (if using video, USB, or Picamera source)
     if source_type == 'video' or source_type == 'usb' or source_type == 'picamera':
