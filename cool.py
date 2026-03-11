@@ -66,7 +66,7 @@ elif os.path.isfile(img_source):
 elif 'usb' in img_source:
     source_type = 'usb'
     usb_idx = int(img_source[3:])
-elif img_source.isdigit():   # <-- ADD THIS
+elif img_source.isdigit():   # agar mengerti 0 adalah default camera webcam
     source_type = 'usb'
     usb_idx = int(img_source)
 elif 'picamera' in img_source:
